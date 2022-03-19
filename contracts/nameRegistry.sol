@@ -6,11 +6,13 @@ contract nameRegistry {
     
 
     // Register new name, value pair
-    function register(string memory name, string memory value) public {
+    function register(string memory name, string memory value) public returns (bool){
         bytes memory mapValue = bytes(map[name]); 
         if (mapValue.length == 0) { // key not found
             map[name] = value;
-        }
+            return true;
+        } 
+        return false;
     }
 
     // Reads the last stored value
