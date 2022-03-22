@@ -44,13 +44,20 @@ module.exports = {
       network_id: "*",       // Any network (default: none)
       // from: '0x2dC53F103F9E79678f7568E4C63266eFFDE095F2'
      }, 
-     ropsten: {
+    rinkeby: {
+      provider: () => new HDWalletProvider(
+        mnemonic, `https://eth-rinkeby.alchemyapi.io/v2/${alchemyApiKey}`,
+      ),
+      network_id: 4,
+      skipDryRun: true,
+     },
+    ropsten: {
       provider: () => new HDWalletProvider(
         mnemonic, `https://eth-ropsten.alchemyapi.io/v2/${alchemyApiKey}`,
       ),
       network_id: 3,
-      gasPrice: 10e9,
       skipDryRun: true,
+      from: "0xD5D38e615624ad01572f7BAc778cD636Af90b446"
      },
     // Useful for testing. The `development` name is special - truffle uses it by default
     // if it's defined here and no other network is specified at the command line.
