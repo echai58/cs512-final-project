@@ -1,5 +1,7 @@
 const TRIALS = 5
 const MAX_RAND_INT = 10;
+const DEFAULT_GAS_PRICE = 1;
+
 // scripts/index.js
 module.exports = async function main (callback) {
     try {
@@ -7,17 +9,11 @@ module.exports = async function main (callback) {
       const NameRegistry = artifacts.require('nameRegistry')
       const nameReg = await NameRegistry.deployed()
 
-      // let val = await nameReg.read('foo');
-      // console.log('Value is: ' + val);
-
-      // await nameReg.register('foo', 'bar2');
-      
-      // val = await nameReg.read('foo');
-      // console.log('Value is: ' + val);
-
       for(let i = 0; i < TRIALS; i++) {
         const key = `key-${i}`
-        const result = await nameReg.register(key, (Math.floor(Math.random() * MAX_RAND_INT).toString()))
+        const result = await nameReg.register(key, 
+                                              (Math.floor(Math.random() * MAX_RAND_INT).toString()), 
+                                              {gasPrice: DEFAULT_GAS_PRICE})
         console.log(result.receipt)
 
         const val = await nameReg.read(key)
@@ -29,4 +25,4 @@ module.exports = async function main (callback) {
       console.error(error)
       callback(1)
     }
-  };
+  }
