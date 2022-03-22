@@ -1,4 +1,4 @@
-const TRIALS = 5
+const TRIALS = 3
 const MAX_RAND_INT = 10;
 const DEFAULT_GAS_PRICE = 1;
 
@@ -12,8 +12,7 @@ module.exports = async function main (callback) {
       for(let i = 0; i < TRIALS; i++) {
         const key = `key-${i}`
         const result = await nameReg.register(key, 
-                                              (Math.floor(Math.random() * MAX_RAND_INT).toString()), 
-                                              {gasPrice: DEFAULT_GAS_PRICE})
+                                              (Math.floor(Math.random() * MAX_RAND_INT).toString()))
         console.log(result.receipt)
 
         const val = await nameReg.read(key)
