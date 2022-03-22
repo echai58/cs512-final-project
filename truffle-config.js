@@ -23,6 +23,9 @@
 // const fs = require('fs');
 // const mnemonic = fs.readFileSync(".secret").toString().trim();
 
+const { alchemyApiKey, mnemonic } = require('./secrets.json');
+const HDWalletProvider = require('@truffle/hdwallet-provider');
+
 module.exports = {
   /**
    * Networks define how you connect to your ethereum client and let you set the
@@ -41,6 +44,14 @@ module.exports = {
       network_id: "*",       // Any network (default: none)
       // from: '0x2dC53F103F9E79678f7568E4C63266eFFDE095F2'
      }, 
+     ropsten: {
+      provider: () => new HDWalletProvider(
+        mnemonic, `https://eth-ropsten.alchemyapi.io/v2/${alchemyApiKey}`,
+      ),
+      network_id: 3,
+      gasPrice: 10e9,
+      skipDryRun: true,
+     },
     // Useful for testing. The `development` name is special - truffle uses it by default
     // if it's defined here and no other network is specified at the command line.
     // You should run a client (like ganache-cli, geth or parity) in a separate terminal
