@@ -1,2 +1,2 @@
 #!/bin/bash
-npx truffle migrate --network development
+npx truffle migrate --network rinkeby
