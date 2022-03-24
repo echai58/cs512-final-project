@@ -1,7 +1,7 @@
 const TRIALS = 10
 const MAX_RAND_INT = 10;
-const gwei = 10^9;
-const DEFAULT_GAS_PRICE = 1000000000;
+const gwei = 10e9;
+const DEFAULT_GAS_PRICE = gwei/2;
 
 // scripts/index.js
 module.exports = async function main (callback) {
@@ -9,8 +9,9 @@ module.exports = async function main (callback) {
       // Functionality here
       const NameRegistry = artifacts.require('nameRegistry')
       const nameReg = await NameRegistry.deployed()
-      const gasPrice = DEFAULT_GAS_PRICE;
-      while (gasPrice < 100*gwei) {
+      let gasPrice = DEFAULT_GAS_PRICE;
+      console.log(gwei)
+      while (gasPrice < 10*gwei) {
           const key = `key-${gasPrice/gwei}`
           var start = new Date().getTime() / 1000;
           const result = await nameReg.register(key, 
@@ -21,7 +22,7 @@ module.exports = async function main (callback) {
           var end = new Date().getTime() / 1000;
           console.log(`Value is: ${val}`)
           console.log(`Time taken is: ${end - start}`)
-          gasPrice + 10*gwei;
+          gasPrice += gwei/2;
       }
   
       callback(0)
