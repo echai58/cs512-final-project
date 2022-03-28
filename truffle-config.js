@@ -23,7 +23,7 @@
 // const fs = require('fs');
 // const mnemonic = fs.readFileSync(".secret").toString().trim();
 
-const { alchemyApiKeyRopsten, alchemyApiKeyRinkeby, mnemonic } = require('./secrets.json');
+const { alchemyApiKeyRopsten, alchemyApiKeyRinkeby, alchemyApiKeyGoerli, mnemonic } = require('./secrets.json');
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 
 module.exports = {
@@ -56,6 +56,13 @@ module.exports = {
         mnemonic, `https://eth-ropsten.alchemyapi.io/v2/${alchemyApiKeyRopsten}`,
       ),
       network_id: 3,
+      skipDryRun: true,
+     },
+     goerli: {
+      provider: () => new HDWalletProvider(
+        mnemonic, `https://eth-goerli.alchemyapi.io/v2/${alchemyApiKeyGoerli}`,
+      ),
+      network_id: 5,
       skipDryRun: true,
      },
     // Useful for testing. The `development` name is special - truffle uses it by default
