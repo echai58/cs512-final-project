@@ -1,13 +1,13 @@
 const fs = require('fs')
 const MAX_RAND_INT = 10
-const GWEI = 10e9
-const INCREMENT = 0.25
-const DEFAULT_GAS_PRICE = GWEI
-const MAX_GAS_PRICE = 2 * GWEI
-const TESTNET = 'Rinkeby'
+const GWEI = 1e9
+const INCREMENT = 0.1
+const DEFAULT_GAS_PRICE = 1.0 * GWEI
+const MAX_GAS_PRICE = 2.0 * GWEI
+const TESTNET = process.argv[process.argv.length - 1]
 
-async function writeResult(testnet, key, val, gasPrice, time) {
-  fs.appendFile(`${testnet}-log.txt`, `${key}, ${val}, ${gasPrice / GWEI}, ${time}\n`, err => {
+async function writeResult(key, val, gasPrice, time) {
+  fs.appendFile(`${TESTNET}-log.txt`, `${key}, ${val}, ${gasPrice / GWEI}, ${time}\n`, err => {
     if(err) {
       console.log(err)
       return
@@ -20,15 +20,15 @@ async function writeResult(testnet, key, val, gasPrice, time) {
 // scripts/index.js
 module.exports = async function main (callback) {
     try {
-      // Functionality here
+      console.log(TESTNET)
+
       const NameRegistry = artifacts.require('nameRegistry')
       const nameReg = await NameRegistry.deployed()
       let gasPrice = DEFAULT_GAS_PRICE;
 
       while (gasPrice <= MAX_GAS_PRICE) {
           const key = `key-${gasPrice / GWEI}`
-          var start = new Date().getTime() / 1000;
-
+          let start = new Date().getTime() / 1000;
           console.log('Starting transaction...')
           const result = await nameReg.register(key, 
                                                 (Math.floor(Math.random() * MAX_RAND_INT).toString()),
@@ -36,12 +36,12 @@ module.exports = async function main (callback) {
           console.log(result.receipt)
 
           const val = await nameReg.read(key)
-          var end = new Date().getTime() / 1000;
+          let end = new Date().getTime() / 1000;
 
           console.log(`Value is: ${val}`)
           console.log(`Time taken is: ${end - start}`)
 
-          await writeResult(TESTNET, key, val, gasPrice, end - start)
+          await writeResult(key, val, gasPrice, end - start)
         
           gasPrice += INCREMENT * GWEI;
       }

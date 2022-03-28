@@ -1,2 +1,2 @@
 #!/bin/bash
-npx truffle exec --network rinkeby ./scripts/index.js
+npx truffle exec --network rinkeby ./scripts/index.js Rinkeby
