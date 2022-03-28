@@ -23,7 +23,7 @@
 // const fs = require('fs');
 // const mnemonic = fs.readFileSync(".secret").toString().trim();
 
-const { alchemyApiKey, mnemonic } = require('./secrets.json');
+const { alchemyApiKeyRopsten, alchemyApiKeyRinkeby, mnemonic } = require('./secrets.json');
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 
 module.exports = {
@@ -46,14 +46,14 @@ module.exports = {
      }, 
     rinkeby: {
       provider: () => new HDWalletProvider(
-        mnemonic, `https://eth-rinkeby.alchemyapi.io/v2/${alchemyApiKey}`,
+        mnemonic, `https://eth-rinkeby.alchemyapi.io/v2/${alchemyApiKeyRinkeby}`,
       ),
       network_id: 4,
       skipDryRun: true,
      },
     ropsten: {
       provider: () => new HDWalletProvider(
-        mnemonic, `https://eth-ropsten.alchemyapi.io/v2/${alchemyApiKey}`,
+        mnemonic, `https://eth-ropsten.alchemyapi.io/v2/${alchemyApiKeyRopsten}`,
       ),
       network_id: 3,
       skipDryRun: true,
