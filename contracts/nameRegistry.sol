@@ -7,18 +7,18 @@ contract nameRegistry {
 
     // Register new name, value pair
     function register(string memory name, string memory value) public returns (bool){
-        bytes memory mapValue = bytes(map[name]); 
-        if (mapValue.length == 0) { // key not found
+        bytes memory valueLength = bytes(map[name]); 
+        if (valueLength.length == 0) { // key not found
             map[name] = value;
             authMap[name] = msg.sender;
-            return true;
+            return false;
         } 
         else{
             if (authMap[name] == msg.sender){
                 map[name] = value;
-                return true;
-            }else{
                 return false;
+            }else{
+                return true;
             }
         }
     }

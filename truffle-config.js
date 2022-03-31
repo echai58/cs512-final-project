@@ -46,7 +46,7 @@ module.exports = {
      }, 
     rinkeby: {
       provider: () => new HDWalletProvider(
-        mnemonic, `https://eth-rinkeby.alchemyapi.io/v2/${alchemyApiKeyRinkeby}`,
+        mnemonic, `wss://eth-rinkeby.alchemyapi.io/v2/${alchemyApiKeyRinkeby}`,
       ),
       network_id: 4,
       skipDryRun: true,
@@ -54,7 +54,7 @@ module.exports = {
      },
     ropsten: {
       provider: () => new HDWalletProvider(
-        mnemonic, `https://eth-ropsten.alchemyapi.io/v2/${alchemyApiKeyRopsten}`,
+        mnemonic, `wss://eth-ropsten.alchemyapi.io/v2/${alchemyApiKeyRopsten}`,
       ),
       network_id: 3,
       skipDryRun: true,
