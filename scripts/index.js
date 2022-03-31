@@ -3,8 +3,9 @@ const MAX_RAND_INT = 10
 const GWEI = 1e9
 const INCREMENT = 0.1
 const DEFAULT_GAS_PRICE = 1.0 * GWEI
-const MAX_GAS_PRICE = 2.0 * GWEI
+const MAX_GAS_PRICE = 5.0 * GWEI
 const TESTNET = process.argv[process.argv.length - 1]
+const TRIALS = 5
 
 async function writeResult(key, val, gasPrice, time) {
   fs.appendFile(`${TESTNET}-log.txt`, `${key}, ${val}, ${gasPrice / GWEI}, ${time}\n`, err => {
@@ -27,6 +28,7 @@ module.exports = async function main (callback) {
       let gasPrice = DEFAULT_GAS_PRICE;
 
       while (gasPrice <= MAX_GAS_PRICE) {
+        for (let i = 0; i < TRIALS; i++) {
           const key = `key-${gasPrice / GWEI}`
           let start = new Date().getTime() / 1000;
           console.log('Starting transaction...')
@@ -44,6 +46,7 @@ module.exports = async function main (callback) {
           await writeResult(key, val, gasPrice, end - start)
         
           gasPrice += INCREMENT * GWEI;
+        }
       }
   
       callback(0)
