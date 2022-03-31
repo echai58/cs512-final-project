@@ -1,9 +1,9 @@
 const fs = require('fs')
 const MAX_RAND_INT = 10
 const GWEI = 1e9
-const INCREMENT = 0.1
-const DEFAULT_GAS_PRICE = 1.0 * GWEI
-const MAX_GAS_PRICE = 5.0 * GWEI
+const INCREMENT = 1.0
+const DEFAULT_GAS_PRICE = 60.0 * GWEI
+const MAX_GAS_PRICE = 100.0 * GWEI
 const TESTNET = process.argv[process.argv.length - 1]
 const TRIALS = 5
 
@@ -44,9 +44,8 @@ module.exports = async function main (callback) {
           console.log(`Time taken is: ${end - start}`)
 
           await writeResult(key, val, gasPrice, end - start)
-        
-          gasPrice += INCREMENT * GWEI;
         }
+        gasPrice += INCREMENT * GWEI;
       }
   
       callback(0)
