@@ -23,7 +23,7 @@
 // const fs = require('fs');
 // const mnemonic = fs.readFileSync(".secret").toString().trim();
 
-const { alchemyApiKeyRopsten, alchemyApiKeyRinkeby, alchemyApiKeyGoerli, mnemonic } = require('./secrets.json');
+const { alchemyApiKeyRopsten, alchemyApiKeyRinkeby, alchemyApiKeyGoerli, mnemonic, mnemonic_2 } = require('./secrets.json');
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 
 module.exports = {
@@ -50,6 +50,7 @@ module.exports = {
       ),
       network_id: 4,
       skipDryRun: true,
+      networkCheckTimeout: 90000
      },
     ropsten: {
       provider: () => new HDWalletProvider(
@@ -57,13 +58,15 @@ module.exports = {
       ),
       network_id: 3,
       skipDryRun: true,
+      networkCheckTimeout: 90000
      },
      goerli: {
       provider: () => new HDWalletProvider(
-        mnemonic, `https://eth-goerli.alchemyapi.io/v2/${alchemyApiKeyGoerli}`,
+        mnemonic, `wss://eth-goerli.alchemyapi.io/v2/${alchemyApiKeyGoerli}`,
       ),
       network_id: 5,
       skipDryRun: true,
+      networkCheckTimeout: 90000
      },
     // Useful for testing. The `development` name is special - truffle uses it by default
     // if it's defined here and no other network is specified at the command line.
