@@ -62,7 +62,7 @@ module.exports = {
      },
      goerli: {
       provider: () => new HDWalletProvider(
-        mnemonic_2, `wss://eth-goerli.alchemyapi.io/v2/${alchemyApiKeyGoerli}`,
+        mnemonic_3, `wss://eth-goerli.alchemyapi.io/v2/${alchemyApiKeyGoerli}`,
       ),
       network_id: 5,
       skipDryRun: true,
