@@ -23,7 +23,7 @@
 // const fs = require('fs');
 // const mnemonic = fs.readFileSync(".secret").toString().trim();
 
-const { alchemyApiKeyRopsten, alchemyApiKeyRinkeby, alchemyApiKeyGoerli, mnemonic, mnemonic_2 } = require('./secrets.json');
+const { alchemyApiKeyRopsten, alchemyApiKeyRinkeby, alchemyApiKeyGoerli, mnemonic, mnemonic_2, mnemonic_3 } = require('./secrets.json');
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 
 module.exports = {
